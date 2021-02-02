@@ -20,14 +20,26 @@ class StretchableScrollViewController: UIViewController {
 extension StretchableScrollViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         let actualPosition = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
-        if (actualPosition.y > 3 && (scrollView.contentOffset.y == 0)){
+        if ((actualPosition.y > 1 && actualPosition.y < 10) && (scrollView.contentOffset.y == 0)) {
+            if scrollView.contentOffset.y == 0 {
+                UIView.animate(withDuration: 0.7, animations: {
+                    self.scrollView.contentInset.top = -self.scrollView.contentSize.height / 3.5
+                })
+            }
+        } else if ((actualPosition.y > 10 && actualPosition.y < 20) && (scrollView.contentOffset.y == 0)) {
+            if scrollView.contentOffset.y == 0 {
+                UIView.animate(withDuration: 0.7, animations: {
+                    self.scrollView.contentInset.top = -self.scrollView.contentSize.height / 2.5
+                })
+            }
+        } else if ((actualPosition.y > 20 ) && (scrollView.contentOffset.y == 0)) {
             if scrollView.contentOffset.y == 0 {
                 UIView.animate(withDuration: 0.7, animations: {
                     self.scrollView.contentInset.top = -self.scrollView.contentSize.height / 2
                 })
             }
-            
-        }else {
+        }else
+        {
             self.scrollView.contentInset.top = 0
         }
     }
